@@ -1,0 +1,33 @@
+.tooltip {
+    position: fixed;
+    z-index: 999;
+    display: none;
+    min-width: 60px;
+    margin: 0;
+    padding: 10px 12px;
+    background: #fff;
+    border-radius: 6px;
+
+    &.active {
+        display: block;
+    }
+
+    .title {
+        color: #000;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.5;
+        margin-bottom: 4px;
+    }
+
+    .personContainer {
+        display: flex;
+        flex-direction: column;
+        row-gap: .5rem;
+
+        .personInfo {
+            font-size: 1rem;
+            font-weight: inherit;
+        }
+    }
+}
