@@ -1,4 +1,4 @@
-import { MapContainer, GeoJSON, useMapEvents, Marker } from "react-leaflet";
+import { MapContainer, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import raw from "./assets/russia.geojson?raw";
 import { useEffect, useMemo, useState } from "react";
@@ -10,18 +10,11 @@ import * as turf from "@turf/turf";
 const data = JSON.parse(raw);
 
 export default function App() {
-    function MapClickHandler({ onClick }: { onClick: (e: any) => void }) {
-        useMapEvents({
-            click: onClick,
-        });
-
-        return null;
-    }
+   
 
     const [activeCity, setActiveCity] = useState<ICity | null>(null);
 
     const onChangeCity = (city: ICity) => {
-        console.log(city, activeCity);
         if (!activeCity || activeCity.id !== city.id)
             return setActiveCity(city);
         setActiveCity(null);
@@ -41,7 +34,6 @@ export default function App() {
         return () => document.removeEventListener("click", mapClickHandler);
     }, []);
 
-    console.log(data);
     const activeRegions = useMemo(() => {
         return cities.reduce((acc: string[], cur: ICity) => {
             if (acc.includes(cur.latin_name)) return acc;
@@ -50,12 +42,10 @@ export default function App() {
                 turf.booleanPointInPolygon(point, el),
             );
             if (!currentRegion) return acc;
-            console.log(currentRegion)
             return acc.concat(currentRegion.properties.name_latin);
         }, []);
     }, []);
 
-    console.log(activeRegions, 'regions')
 
     return (
         <>

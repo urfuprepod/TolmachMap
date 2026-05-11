@@ -3,7 +3,6 @@ import styles from "./styles.module.css";
 import type { ICity, IPerson } from "../../types";
 import PersonInfo from "./PersonInfo";
 import clsx from "clsx";
-import L from "leaflet";
 import { useMap } from "react-leaflet";
 
 type Props = {

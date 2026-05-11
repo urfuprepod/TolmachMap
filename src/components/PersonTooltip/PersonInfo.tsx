@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import type { IPerson } from "../../types";
 import styles from "./styles.module.css";
 
