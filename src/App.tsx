@@ -2,11 +2,10 @@ import { MapContainer, GeoJSON, useMapEvents, Marker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import raw from "./assets/russia.geojson?raw";
 import { useEffect, useMemo, useState } from "react";
-import { renderToString } from "react-dom/server";
-import L from "leaflet";
 import { type IPerson, type ICity } from "./types";
 import { persons, cities } from "./mocks";
 import { CityMarker, PersonTooltip } from "./components";
+import * as turf from "@turf/turf";
 
 const data = JSON.parse(raw);
 
@@ -34,13 +33,29 @@ export default function App() {
     }, [activeCity]);
 
     const mapClickHandler = () => {
-        setActiveCity(null)
-    }
+        setActiveCity(null);
+    };
 
     useEffect(() => {
-        document.addEventListener('click', mapClickHandler);
-        return () => document.removeEventListener('click', mapClickHandler)
-    }, [])
+        document.addEventListener("click", mapClickHandler);
+        return () => document.removeEventListener("click", mapClickHandler);
+    }, []);
+
+    console.log(data);
+    const activeRegions = useMemo(() => {
+        return cities.reduce((acc: string[], cur: ICity) => {
+            if (acc.includes(cur.latin_name)) return acc;
+            const point = turf.point([cur.xCoor, cur.yCoor]);
+            const currentRegion = data.features.find((el: any) =>
+                turf.booleanPointInPolygon(point, el),
+            );
+            if (!currentRegion) return acc;
+            console.log(currentRegion)
+            return acc.concat(currentRegion.properties.name_latin);
+        }, []);
+    }, []);
+
+    console.log(activeRegions, 'regions')
 
     return (
         <>
@@ -51,31 +66,21 @@ export default function App() {
                 minZoom={5}
                 dragging={false}
                 maxZoom={7}
+                preferCanvas
                 style={{ height: "100vh", background: "#111" }}
             >
-                <MapClickHandler
-                    onClick={(e) => {
-                        console.log(e);
-                    }}
-                />
                 <GeoJSON
                     data={data}
                     style={(feature: any) => {
-                        const volgaRegions = [
-                            "Samara Oblast",
-                            "Tatarstan",
-                            "Nizhny Novgorod Oblast",
-                        ];
-
-                        const isVolga = volgaRegions.includes(
+                        const hasPersons = activeRegions.includes(
                             feature.properties.name_latin,
                         );
 
                         return {
-                            fillColor: isVolga ? "#ff5500" : "#444",
-                            fillOpacity: isVolga ? 1 : 0.3,
+                            fillColor: hasPersons ? "#ff5500" : "#444",
+                            fillOpacity: hasPersons ? 1 : 0.3,
                             color: "#111",
-                            weight: isVolga ? 2 : 1,
+                            weight: hasPersons ? 2 : 1,
                         };
                     }}
                 />

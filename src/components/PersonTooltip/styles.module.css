@@ -28,6 +28,8 @@
         .personInfo {
             font-size: 1rem;
             font-weight: inherit;
+            display: flex;
+            flex-direction: column;
         }
     }
 }

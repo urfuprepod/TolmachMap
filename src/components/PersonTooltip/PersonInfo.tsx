@@ -7,12 +7,13 @@ type Props = {
 };
 
 const PersonInfo: FC<Props> = ({ person }) => {
-    const { name, deathYear, birthYear } = person;
+    const { name, deathYear, birthYear, post } = person;
 
     return (
-        <span className={styles.personInfo}>
-            {name} {`(${birthYear ?? "н/д"} - ${deathYear ?? "н/д"})`}
-        </span>
+        <div className={styles.personInfo}>
+            <span>{name} {`(${birthYear ?? "н/д"} - ${deathYear ?? "н/д"})`}</span>
+            <strong>{post}</strong>
+        </div>
     );
 };
 
