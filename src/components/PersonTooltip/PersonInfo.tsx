@@ -11,7 +11,7 @@ const PersonInfo: FC<Props> = ({ person }) => {
 
     return (
         <div className={styles.personInfo}>
-            <span>{name} {`(${birthYear ?? "н/д"} - ${deathYear ?? "н/д"})`}</span>
+            <span>{name}</span>
             <strong>{post}</strong>
         </div>
     );
