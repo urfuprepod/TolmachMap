@@ -15,6 +15,13 @@
         transform: translate(-50%, -50%);
     }
 
+    .titleContainer {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
     .title {
         color: #000;
         font-size: 16px;

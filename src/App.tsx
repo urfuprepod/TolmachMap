@@ -10,8 +10,6 @@ import * as turf from "@turf/turf";
 const data = JSON.parse(raw);
 
 export default function App() {
-   
-
     const [activeCity, setActiveCity] = useState<ICity | null>(null);
 
     const onChangeCity = (city: ICity) => {
@@ -46,8 +44,6 @@ export default function App() {
         }, []);
     }, []);
 
-
-    console.log(data)
     return (
         <>
             {" "}
@@ -82,6 +78,7 @@ export default function App() {
                 <PersonTooltip
                     persons={currentPersons}
                     activeCity={activeCity}
+                    onClose={mapClickHandler}
                 />
             </MapContainer>
         </>

@@ -6,7 +6,9 @@ body {
 
 * {
     box-sizing: border-box;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family:
+        "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 h1,
@@ -15,14 +17,28 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0;
-  padding: 0;
-  text-align: center;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+button {
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    transition: all 0.2s ease;
+
+    &:hover {
+        transform: scale(1.2);
+    }
 }
 
 p {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .leaflet-control-attribution.leaflet-control {
