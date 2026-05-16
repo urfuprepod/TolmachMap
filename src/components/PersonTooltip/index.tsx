@@ -3,10 +3,9 @@ import styles from "./styles.module.css";
 import type { ICity, IPerson } from "../../types";
 import PersonInfo from "./PersonInfo";
 import clsx from "clsx";
-import { useMap } from "react-leaflet";
 import ResponsivePagination from "react-responsive-pagination";
 import "react-responsive-pagination/themes/classic-light-dark.css";
-import { Cross, X } from "lucide-react";
+import { X } from "lucide-react";
 
 type Props = {
     persons: IPerson[];
@@ -18,7 +17,6 @@ const PERSONS_ON_PAGE = 10;
 
 const PersonTooltip: FC<Props> = (props) => {
     const { persons, activeCity, onClose } = props;
-    const map = useMap();
 
     const pageCount = useMemo(() => {
         if (persons.length <= PERSONS_ON_PAGE) return 0;

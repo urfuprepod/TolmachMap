@@ -7,7 +7,7 @@ type Props = {
 };
 
 const PersonInfo: FC<Props> = ({ person }) => {
-    const { name, deathYear, birthYear, post } = person;
+    const { name, post } = person;
 
     return (
         <div className={styles.personInfo}>

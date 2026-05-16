@@ -1,0 +1,15 @@
+{
+  "hash": "70aa0fdb",
+  "configHash": "3a9e349e",
+  "lockfileHash": "e3b0c442",
+  "browserHash": "7e6e3c86",
+  "optimized": {
+    "react-responsive-pagination": {
+      "src": "../../node_modules/react-responsive-pagination/dist/index.js",
+      "file": "react-responsive-pagination.js",
+      "fileHash": "5f85dc4d",
+      "needsInterop": false
+    }
+  },
+  "chunks": {}
+}
